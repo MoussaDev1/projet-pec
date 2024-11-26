@@ -1,6 +1,5 @@
 <?php
 
-// Inclure les fichiers nécessaires
 require_once 'C:\xampp\htdocs\ProjetPec\app\lib\database.php';
 require_once 'C:\xampp\htdocs\ProjetPec\app\models\user.php';
 require_once 'C:\xampp\htdocs\ProjetPec\app\controllers\AuthController.php';

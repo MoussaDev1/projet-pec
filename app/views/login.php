@@ -1,4 +1,4 @@
-<form action="" method="post">
+<form action="" method="POST">
     <div>
         <label for="username">Nom d'utilisateur</label><br />
         <input type="text" id="username" name="username" />

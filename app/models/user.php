@@ -27,7 +27,7 @@ class User
         ]);
     }
 
-    public function authenticate(string $username, string $password): bool
+    public function login(string $username, string $password): bool
     {
         $query = "SELECT * FROM users WHERE username = :username";
         $stmt = $this->pdo->prepare($query);

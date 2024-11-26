@@ -21,7 +21,7 @@ class AuthController
             $username = $_POST['username'];
             $password = $_POST['password'];
 
-            if ($this->user->authenticate($username, $password)) {
+            if ($this->user->login($username, $password)) {
                 $_SESSION['username'] = $username;
                 header('Location: /dashboard');
                 exit;
@@ -42,7 +42,7 @@ class AuthController
 
             try {
                 $this->user->register($username, $email, $password);
-                header('Location: /ProjetPec/public/index.php?action=login');
+                header('Location: /ProjetPec/public/login');
                 exit;
             } catch (\Exception $e) {
                 echo "Erreur : " . $e->getMessage();
