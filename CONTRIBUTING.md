@@ -8,7 +8,7 @@
 
 ## Workflow
 
-1. Créez une branche pour votre tâche (a partir) : `git checkout -b feature/nouvelle-fonctionnalite`.
-2. Codez et faites des commits clairs.
+1. Créez une branche pour votre tâche (a partir de la branche developp) : `git checkout -b feature/nouvelle-fonctionnalite`.
+2. Codez et faites des commits clairs : `git commit -m "message-clair-de-votre-code"`
 3. Poussez la branche : `git push origin feature/nouvelle-fonctionnalite`.
 4. Ouvrez une pull request (PR)
