@@ -1,0 +1,25 @@
+RewriteEngine On
+RewriteBase /ProjetPec/public/
+
+# Redirige /login vers index.php?action=login
+RewriteRule ^login$ index.php?action=login [QSA,L]
+
+# Redirige /register vers index.php?action=register
+RewriteRule ^register$ index.php?action=register [QSA,L]
+
+#Redirige /home vers index.php?action=home
+RewriteRule ^home$ index.php?action=home [QSA,L]
+
+#Redirige /registerClient vers index.php?action=registerClient
+RewriteRule ^registerClient$ index.php?action=registerClient [QSA,L]
+
+#Redirige /registerTechnicien vers index.php?action=registerTechnicien
+RewriteRule ^registerTechnicien$ index.php?action=registerTechnicien [QSA,L]
+
+#Redirige /validationEmail vers index.php?action=registerTechnicien
+RewriteRule ^validationEmail$ index.php?action=validationEmail [QSA,L]
+
+# Si la requête ne correspond à aucun fichier ou répertoire physique, redirige vers index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]

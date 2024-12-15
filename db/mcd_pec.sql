@@ -5,6 +5,8 @@ CREATE TABLE
     `mot_de_passe` VARCHAR(255) NOT NULL,
     `role` ENUM ('client', 'technicien', 'admin') NOT NULL,
     `date_creation` TIMESTAMP DEFAULT (CURRENT_TIMESTAMP)
+    `email_verificatied`
+    `token_validation` VARCHAR(255)
   );
 
 CREATE TABLE
@@ -23,9 +25,9 @@ CREATE TABLE
 CREATE TABLE
   `technicien` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `user_id` INT,
     `nom` VARCHAR(100) NOT NULL,
     `prenom` VARCHAR(100) NOT NULL,
-    `email` VARCHAR(255) UNIQUE NOT NULL,
     `specialite` VARCHAR(255),
     `localisation` VARCHAR(255),
     `disponibilite` ENUM ('disponible', 'en intervention') DEFAULT 'disponible',
@@ -35,11 +37,19 @@ CREATE TABLE
 CREATE TABLE
   `client` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `user_id` INT,
     `nom` VARCHAR(100) NOT NULL,
-    `email` VARCHAR(255) NOT NULL,
     `prenom` VARCHAR(100) NOT NULL,
     `adresse` TEXT NOT NULL,
     `telephone` VARCHAR(15)
+  );
+
+CREATE TABLE
+  `email_verification_tokens` (
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `user_id` INT NOT NULL,
+    `token` VARCHAR(255) NOT NULL,
+    `expires_at` DATETIME NOT NULL
   );
 
 CREATE TABLE
@@ -64,7 +74,7 @@ CREATE TABLE
   `support_reclamation` (
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `id_utilisateur` INT,
-    `id_technicien` INT,  
+    `id_technicien` INT,
     `message_reclamation` TEXT NOT NULL,
     `statut` ENUM ('en cours', 'résolu') DEFAULT 'en cours',
     `date_creation` TIMESTAMP DEFAULT (CURRENT_TIMESTAMP),
@@ -83,6 +93,8 @@ ALTER TABLE `support_reclamation` ADD FOREIGN KEY (`id_utilisateur`) REFERENCES 
 
 ALTER TABLE `support_reclamation` ADD FOREIGN KEY (`id_technicien`) REFERENCES `technicien` (`id`);
 
-ALTER TABLE `technicien` ADD FOREIGN KEY (`id`) REFERENCES `utilisateur` (`id`);
+ALTER TABLE `technicien` ADD FOREIGN KEY (`user_id`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE;
 
-ALTER TABLE `client` ADD FOREIGN KEY (`id`) REFERENCES `utilisateur` (`id`);
+ALTER TABLE `client` ADD FOREIGN KEY (`user_id`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `email_verification_tokens` ADD FOREIGN KEY (`user_id`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE;

@@ -1,0 +1,1 @@
+<p>Votre mail a bien été confirmer ! Merci pour votre inscription à doc2Wheel</p>
